@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0B5F4B">
+  <meta name="description" content="Petit à Petit : un compagnon bienveillant, gratuit et sans compte, pour prendre soin de soi à son rythme.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Petit à Petit">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon.png">
+  <link rel="apple-touch-icon" href="./icons/icon-180.png">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Petit à Petit</title>
+</head>
+<body>
+  <div class="app-wrap">
+
+    <!-- Onboarding -->
+    <div id="onboarding" aria-live="polite">
+      <div class="onb-step is-on" data-step="0">
+        <svg class="onb-art" viewBox="0 0 320 160" aria-hidden="true">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FFF3E4"/>
+              <stop offset="1" stop-color="#F5B895"/>
+            </linearGradient>
+          </defs>
+          <rect width="320" height="160" rx="24" fill="url(#sky)"/>
+          <circle cx="160" cy="70" r="32" fill="#FFE27A"/>
+          <circle cx="150" cy="58" r="14" fill="#FFF6C2"/>
+          <path d="M0 110 C80 90 140 120 200 100 C250 86 290 96 320 88 L320 160 L0 160 Z" fill="#3A8F70"/>
+          <path d="M0 130 C70 118 130 140 200 124 C250 114 290 126 320 120 L320 160 L0 160 Z" fill="#0B5F4B"/>
+          <circle cx="90" cy="142" r="10" fill="#FBF6EF"/>
+          <circle cx="130" cy="134" r="13" fill="#FBF6EF"/>
+          <circle cx="180" cy="126" r="16" fill="#FBF6EF"/>
+        </svg>
+        <h1>Petit à Petit</h1>
+        <p class="lead">Un compagnon bienveillant, à votre rythme.</p>
+        <p>Cette appli est un soutien du quotidien : pas un régime, pas un jugement, et pas un avis médical. Elle est <strong>gratuite</strong>, <strong>sans compte</strong> et <strong>sans publicité</strong>. Vos informations restent sur votre appareil.</p>
+        <label class="check-line card">
+          <input type="checkbox" id="disclaimer-ok">
+          <span>J’ai compris que cette appli ne remplace pas un avis médical, et que je peux en parler à un médecin avant de commencer, surtout si j’ai un problème de santé.</span>
+        </label>
+        <p class="error" id="disc-error" hidden>Merci de cocher la case pour continuer — c’est important.</p>
+        <button class="btn btn-primary btn-block mt-2" type="button" data-onb="next">Commencer en douceur</button>
+      </div>
+
+      <div class="onb-step" data-step="1">
+        <h1>Comment vous appeler&nbsp;?</h1>
+        <p class="lead">Juste un prénom, ou le nom que vous préférez lire le matin.</p>
+        <div class="field mt-2">
+          <label for="onb-prenom">Prénom</label>
+          <input id="onb-prenom" type="text" autocomplete="given-name" maxlength="40" placeholder="Votre prénom">
+        </div>
+        <p class="error" id="prenom-error" hidden>Indiquez un prénom pour personnaliser l’accueil.</p>
+        <div class="stack mt-2">
+          <button class="btn btn-primary btn-block" type="button" data-onb="next">Continuer</button>
+          <button class="btn btn-ghost btn-block" type="button" data-onb="prev">Retour</button>
+        </div>
+      </div>
+
+      <div class="onb-step" data-step="2">
+        <h1>Votre taille</h1>
+        <p class="lead">Elle sert uniquement à calculer un IMC, que vous pourrez masquer. Rien d’autre n’en est déduit automatiquement.</p>
+        <div class="field mt-2">
+          <label for="onb-taille">Taille (cm)</label>
+          <input id="onb-taille" type="number" inputmode="numeric" min="120" max="230" step="1" placeholder="par ex. 170">
+        </div>
+        <p class="error" id="taille-error" hidden>Indiquez une taille entre 120 et 230 cm.</p>
+        <div class="stack mt-2">
+          <button class="btn btn-primary btn-block" type="button" data-onb="next">Continuer</button>
+          <button class="btn btn-ghost btn-block" type="button" data-onb="prev">Retour</button>
+        </div>
+      </div>
+
+      <div class="onb-step" data-step="3">
+        <h1>Votre poids actuel</h1>
+        <p class="lead">Un point de départ, pas un verdict. Vous pourrez le noter à nouveau quand vous voudrez, sans obligation quotidienne.</p>
+        <div class="field mt-2">
+          <label for="onb-poids">Poids (kg)</label>
+          <input id="onb-poids" type="text" inputmode="decimal" placeholder="par ex. 110,5">
+        </div>
+        <p class="error" id="poids-error" hidden>Indiquez un poids entre 30 et 300 kg.</p>
+        <div class="stack mt-2">
+          <button class="btn btn-primary btn-block" type="button" data-onb="next">Continuer</button>
+          <button class="btn btn-ghost btn-block" type="button" data-onb="prev">Retour</button>
+        </div>
+      </div>
+
+      <div class="onb-step" data-step="4">
+        <h1>Un objectif réaliste</h1>
+        <p class="lead">Perdre 5 à 10&nbsp;% du poids actuel est souvent un premier cap recommandé, déjà bénéfique pour la santé. C’est vous qui choisissez, et vous pourrez l’ajuster plus tard.</p>
+        <div id="goal-suggestions" class="mt-1"></div>
+        <div class="field mt-1">
+          <label for="onb-objectif">Objectif (kg)</label>
+          <input id="onb-objectif" type="text" inputmode="decimal" placeholder="Votre objectif">
+        </div>
+        <p class="error" id="objectif-error" hidden>Indiquez un objectif cohérent (au moins 30 kg, et typiquement un peu sous votre poids actuel).</p>
+        <div class="stack mt-2">
+          <button class="btn btn-primary btn-block" type="button" data-onb="next">Continuer</button>
+          <button class="btn btn-ghost btn-block" type="button" data-onb="prev">Retour</button>
+        </div>
+      </div>
+
+      <div class="onb-step" data-step="5">
+        <h1>C’est un très bel élan</h1>
+        <div id="onb-recap" class="card mt-1"></div>
+        <p class="mt-1">Vous pourrez tout modifier plus tard. On y va, sans se presser.</p>
+        <div class="stack mt-2">
+          <button class="btn btn-primary btn-block" type="button" data-onb="finish">Entrer dans l’appli</button>
+          <button class="btn btn-ghost btn-block" type="button" data-onb="prev">Retour</button>
+        </div>
+      </div>
+      <div class="onb-dots" id="onb-dots" aria-hidden="true"></div>
+    </div>
+
+    <!-- App -->
+    <div id="app">
+      <header class="topbar">
+        <div class="brand">
+          <img src="./icons/icon-192.png" alt="">
+          <span>Petit à Petit</span>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn" type="button" data-action="open-profil" title="Mon profil" aria-label="Mon profil">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M5 19c1.6-3.2 4-4.8 7-4.8s5.4 1.6 7 4.8"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section id="view-accueil" class="view is-on" data-view="accueil"></section>
+        <section id="view-poids" class="view" data-view="poids"></section>
+        <section id="view-bouger" class="view" data-view="bouger"></section>
+        <section id="view-manger" class="view" data-view="manger"></section>
+        <section id="view-motivation" class="view" data-view="motivation"></section>
+      </main>
+
+      <nav class="tabbar" aria-label="Navigation principale">
+        <button type="button" data-tab="accueil" aria-current="page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5"/><path d="M6.5 10.5V19h11V10.5"/></svg>
+          Accueil
+        </button>
+        <button type="button" data-tab="poids">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 8.5h12l1.5 11h-15L6 8.5z"/><path d="M10 8.5a2 2 0 1 1 4 0"/></svg>
+          Poids
+        </button>
+        <button type="button" data-tab="bouger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="14" cy="5" r="2"/><path d="M8 21l3-7 3 2 3 5"/><path d="M6 13c2-1 4-4 6-4l2 3"/></svg>
+          Bouger
+        </button>
+        <button type="button" data-tab="manger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 3v10M6 3c0 4 4 4 4 8V3"/><path d="M16 3v18"/><path d="M16 8c3 0 3-5 0-5"/></svg>
+          Manger
+        </button>
+        <button type="button" data-tab="motivation">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 19l-6-5.5C4 12 3.5 9.5 5.4 7.8 7 6.3 9.2 6.5 12 9c2.8-2.5 5-2.7 6.6-1.2 1.9 1.7 1.4 4.2-.6 5.7L12 19z"/></svg>
+          Motivation
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <div class="sheet" id="sheet"></div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <noscript>
+    <p style="padding:2rem;font-family:sans-serif;">Petit à Petit a besoin de JavaScript pour fonctionner, uniquement sur votre appareil.</p>
+  </noscript>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
