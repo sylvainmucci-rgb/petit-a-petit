@@ -2,6 +2,8 @@
 
 Un compagnon bienveillant, gratuit et sans compte, pour prendre soin de soi à son rythme.
 
+**En ligne, gratuitement :** [https://sylvainmucci-rgb.github.io/petit-a-petit/](https://sylvainmucci-rgb.github.io/petit-a-petit/)
+
 Application web progressive (PWA) en français, pensée pour les personnes en situation de surpoids ou d’obésité : encouragements au quotidien, suivi du poids, mouvements doux, idées de repas simples, et un espace de motivation sans jugement.
 
 **Ce n’est pas un avis médical.** Parlez à un médecin avant de commencer un programme, surtout en cas de problème de santé.
